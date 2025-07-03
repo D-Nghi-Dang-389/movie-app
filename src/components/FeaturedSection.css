@@ -1,0 +1,47 @@
+.featured-section {
+  background-color: #002b49;
+  padding: 2rem;
+  color: white;
+}
+
+.featured-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.featured-title {
+  font-size: 1rem !important;  
+  font-weight:500;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+
+.featured-viewall {
+  color: #9dc9f2;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.featured-card {
+  height: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.featured-img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
