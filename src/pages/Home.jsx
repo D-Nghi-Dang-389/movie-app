@@ -10,7 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch Featured Movies
-    fetch("http://localhost:8080/media/featured?category=movie")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/media/featured?category=movie`)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.slice(0, 6));
@@ -20,7 +20,7 @@ const Home = () => {
       });
 
     // Fetch Featured TV Shows
-    fetch("http://localhost:8080/media/featured?category=tv")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/media/featured?category=tv`)
       .then((res) => res.json())
       .then((data) => {
         setTvshows(data.slice(0, 6));

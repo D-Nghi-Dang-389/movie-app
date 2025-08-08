@@ -12,7 +12,7 @@ function HeroSection() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/media/movies")
+      .get(`${process.env.REACT_APP_API_BASE_URL}/media/movies`)
       .then((response) => {
         const data = response.data;
 

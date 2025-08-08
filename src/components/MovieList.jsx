@@ -8,7 +8,7 @@ const Movies = () => {
 
   // Fetch all movies initially
   useEffect(() => {
-    fetch("http://localhost:8080/media/movies")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/media/movies`)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data);
@@ -23,14 +23,14 @@ const Movies = () => {
     if (search.trim() === "") {
       
       // If search is empty, show all movies again
-      fetch("http://localhost:8080/media/movies")
+      fetch(`${process.env.REACT_APP_API_BASE_URL}/media/movies`)
         .then((res) => res.json())
         .then((data) => setMovies(data))
         .catch((err) => console.error(err));
     } else {
       
       // Fetch from /media/search?title=
-      fetch(`http://localhost:8080/media/search?title=${search}`)
+      fetch(`${process.env.REACT_APP_API_BASE_URL}/media/search?title=${search}`)
         .then((res) => res.json())
         .then((data) => {
           

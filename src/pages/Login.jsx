@@ -18,7 +18,7 @@ const Login = ({ setUser }) => {
     e.preventDefault();
     setError("");
 
-    fetch("http://localhost:8080/users/login", {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)

@@ -7,7 +7,7 @@ const Details = () => {
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/media/${id}`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/media/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Item not found");
         return res.json();

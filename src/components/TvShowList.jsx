@@ -8,7 +8,7 @@ const TVShows = () => {
 
   // Load all TV shows initially
   useEffect(() => {
-    fetch("http://localhost:8080/media/tvshows")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/media/tvshows`)
       .then((res) => res.json())
       .then((data) => setTvshows(data))
       .catch((err) => {
@@ -19,12 +19,12 @@ const TVShows = () => {
   // Fetch filtered data from backend when search changes
   useEffect(() => {
     if (search.trim() === "") {
-      fetch("http://localhost:8080/media/tvshows")
+      fetch(`${process.env.REACT_APP_API_BASE_URL}/media/tvshows`)
         .then((res) => res.json())
         .then((data) => setTvshows(data))
         .catch((err) => console.error(err));
     } else {
-      fetch(`http://localhost:8080/media/search?title=${search}`)
+      fetch(`${process.env.REACT_APP_API_BASE_URL}/media/search?title=${search}`)
         .then((res) => res.json())
         .then((data) => {
           const onlyTV = data.filter(item => item.category === "tv");
