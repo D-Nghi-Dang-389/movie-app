@@ -9,15 +9,28 @@ const Home = () => {
   const [tvshows, setTvshows] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/movies")
+    // Fetch Featured Movies
+    fetch("http://localhost:8080/media/featured?category=movie")
       .then((res) => res.json())
       .then((data) => {
-        setMovies(data.filter((item) => item.category === "movie").slice(0, 6));
-        setTvshows(data.filter((item) => item.category === "tv").slice(0, 6));
+        setMovies(data.slice(0, 6));
+      })
+      .catch((err) => {
+        console.error("Failed to fetch featured movies:", err);
+      });
+
+    // Fetch Featured TV Shows
+    fetch("http://localhost:8080/media/featured?category=tv")
+      .then((res) => res.json())
+      .then((data) => {
+        setTvshows(data.slice(0, 6));
+      })
+      .catch((err) => {
+        console.error("Failed to fetch featured TV shows:", err);
       });
   }, []);
 
-  return (
+   return (
     <div>
       <HeroSection title="Trending Now" items={movies} type="movie" />
       <FeaturedSection title="Featured Movies" items={movies} type="movie" />

@@ -1,6 +1,6 @@
-
-
 const Navbar = () => {
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
   return (
     <nav style={styles.navbar}>
       <div style={styles.left}>
@@ -12,12 +12,27 @@ const Navbar = () => {
         <a href="/tvshows" style={styles.link}>TV Shows</a>
       </div>
       <div style={styles.right}>
-        <a href="/register" style={styles.link}>Register</a>
-        <a href="/login" style={styles.link}>Login</a>
+        {user ? (
+          <>
+            <a href="/dashboard" style={styles.link}>My Account</a>
+            <a href="/" style={styles.link} onClick={() => {
+              localStorage.removeItem("loggedInUser");
+              window.location.href = "/login";
+            }}>
+              Logout
+            </a>
+          </>
+        ) : (
+          <>
+            <a href="/register" style={styles.link}>Register</a>
+            <a href="/login" style={styles.link}>Login</a>
+          </>
+        )}
       </div>
     </nav>
   );
 };
+
 
 const styles = {
   navbar: {

@@ -6,18 +6,41 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
 
+  // Fetch all movies initially
   useEffect(() => {
-    fetch("http://localhost:3001/movies")
+    fetch("http://localhost:8080/media/movies")
       .then((res) => res.json())
       .then((data) => {
-        const onlyMovies = data.filter(item => item.category === "movie");
-        setMovies(onlyMovies);
+        setMovies(data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch movies:", err);
       });
   }, []);
 
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(search.toLowerCase())
-  );
+  // Fetch from backend whenever search changes
+  useEffect(() => {
+    if (search.trim() === "") {
+      
+      // If search is empty, show all movies again
+      fetch("http://localhost:8080/media/movies")
+        .then((res) => res.json())
+        .then((data) => setMovies(data))
+        .catch((err) => console.error(err));
+    } else {
+      
+      // Fetch from /media/search?title=
+      fetch(`http://localhost:8080/media/search?title=${search}`)
+        .then((res) => res.json())
+        .then((data) => {
+          
+          // Filter only movies (backend may return tv too)
+          const filtered = data.filter(item => item.category === "movie");
+          setMovies(filtered);
+        })
+        .catch((err) => console.error("Search failed:", err));
+    }
+  }, [search]);
 
   return (
     <Container className="my-5">
@@ -33,7 +56,7 @@ const Movies = () => {
       </Form>
 
       <Row xs={1} sm={2} md={4} lg={4} xl={4} xxl={4} className="g-4">
-        {filteredMovies.map((movie) => (
+        {movies.map((movie) => (
           <Col key={movie.id}>
             <Link to={`/details/${movie.id}`} style={{ textDecoration: "none", color: "inherit" }}>
               <Card>

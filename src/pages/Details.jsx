@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 
 const Details = () => {
-  const { id } = useParams();
+  const { id } = useParams(); //Get media ID from URL
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/movies/${id}`)
+    fetch(`http://localhost:8080/media/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Item not found");
         return res.json();

@@ -12,7 +12,7 @@ function HeroSection() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/movies")
+      .get("http://localhost:8080/media/movies")
       .then((response) => {
         const data = response.data;
 
